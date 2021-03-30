@@ -8,11 +8,11 @@ BLURFACTOR = 5
 MINPORTAREA = 800
 CNTTHRESH1 = 255
 CNTRHRESH2 = 255
-FOCALLENGTH = 720 # can be calculated with the height in pixels and distance
+FOCALLENGTH = 1400 # can be calculated with the height in pixels and distance
 PORTAPOTHEM = 3.5 # can be any unit
 video = cv2.VideoCapture(0)
 
-SERVERADDR = '10.xx.xx.2' # Put the server address here
+SERVERADDR = '10.11.55.2' # Put the server address here
 
 NetworkTables.initialize(server=SERVERADDR)
 sd = NetworkTables.getTable("Vision")
