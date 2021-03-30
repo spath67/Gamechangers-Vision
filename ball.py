@@ -10,10 +10,10 @@ BLURFACTOR = 11
 MAXRADIUS = 10
 COLORL = (20, 182, 51)
 COLORU = (77, 255, 255)
-FOCALLENGTH = 720
+FOCALLENGTH = 1400
 BALLRADIUS = 3
 
-SERVERADDR = '10.xx.xx.2' # Put the server address here
+SERVERADDR = '10.11.55.2' # Put the server address here
 
 NetworkTables.initialize(server=SERVERADDR)
 sd = NetworkTables.getTable("Vision")
