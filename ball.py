@@ -1,6 +1,8 @@
 from cv2 import cv2
 import numpy as np
 import imutils
+import threading
+from networktables import NetworkTables
 
 video = cv2.VideoCapture(0)
 
@@ -10,6 +12,11 @@ COLORL = (20, 182, 51)
 COLORU = (77, 255, 255)
 FOCALLENGTH = 720
 BALLRADIUS = 3
+
+SERVERADDR = '10.xx.xx.2' # Put the server address here
+
+NetworkTables.initialize(server=SERVERADDR)
+sd = NetworkTables.getTable("Vision")
 
 if not video.isOpened():
     print("Cannot open camera")
@@ -53,13 +60,15 @@ while 1:
             center = (0, 0)
         
         if r > 10:
-            cv2.circle(frame, (int(center[0]), int(center[1])), int(r),
-                (0, 255, 255), 2) 
+            # cv2.circle(frame, (int(center[0]), int(center[1])), int(r),
+            #    (0, 255, 255), 2) 
             rp = getRelativePos(r, center[0])
-            cv2.putText(frame, "Lateral: "+str(rp[0])+" Longtitudinal: "+str(rp[1]), (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 0, 0))
-            cv2.circle(frame, center, 5, (0, 0, 255), -1)
+            sd.putNumber("Ball Lateral Position", rp[0])
+            sd.putNumber("Ball Longitudinal Position", rp[1])
+            # cv2.putText(frame, "Lateral: "+str(rp[0])+" Longtitudinal: "+str(rp[1]), (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 0, 0))
+            # cv2.circle(frame, center, 5, (0, 0, 255), -1)
 
-    cv2.imshow("Frame", frame)
+    #cv2.imshow("Frame", frame)
 
     if cv2.waitKey(1) == ord('q'):
         break
