@@ -12,7 +12,7 @@ FOCALLENGTH = 1400 # can be calculated with the height in pixels and distance
 PORTAPOTHEM = 3.5 # can be any unit
 video = cv2.VideoCapture(0)
 
-SERVERADDR = '10.11.55.2' # Put the server address here
+SERVERADDR = '10.xx.xx.2' # Put the server address here
 
 NetworkTables.initialize(server=SERVERADDR)
 sd = NetworkTables.getTable("Vision")
@@ -74,16 +74,16 @@ while 1:
             else:
                 center = (0, 0)
 
-            #cv2.circle(frame, center, 5, (0, 0, 255), -1)
-            #cv2.line(frame, center, midpoint, (255, 0, 0), 3)
+            cv2.circle(frame, center, 5, (0, 0, 255), -1)
+            cv2.line(frame, center, midpoint, (255, 0, 0), 3)
 
             apothem_dist = math.sqrt(((center[0]-midpoint[0])**2) + ((center[1]-midpoint[1])**2))
             rp = getRelativePos(apothem_dist, center[0])
             sd.putNumber("Port Lateral Position", rp[0])
             sd.putNumber("Port Longitudinal Position", rp[1])
-            #cv2.putText(frame, "Lateral: "+str(rp[0])+" Longtitudinal: "+str(rp[1]), (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 0, 0))
+            cv2.putText(frame, "Lateral: "+str(rp[0])+" Longtitudinal: "+str(rp[1]), (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 0, 0))
 
-    #cv2.imshow("Frame", frame)
+    cv2.imshow("Frame", frame)
 
     if cv2.waitKey(1) == ord('q'):
         break
