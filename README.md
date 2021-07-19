@@ -6,3 +6,6 @@ Vision code for Gamechangers 2021. Written in Python3 and OpenCV.
 
 ## Shooter
 ![Shooter](Shooter.gif)
+
+## Derivations
+![Derivations](derivations.png)
